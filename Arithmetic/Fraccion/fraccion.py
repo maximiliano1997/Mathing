@@ -33,10 +33,10 @@ class Fraccion():
     # OPERACIONES
 
     def suma(self, otra: 'Fraccion') -> 'Fraccion':
-        mcm = self.micimo_comun_multiplo(self.denominador, otra.denominador)
+        mcm = self.minimo_comun_multiplo(self.denominador, otra.denominador)
         diferencia_self = mcm / self.denominador
         diferencia_otra = mcm / otra.denominador
-        numerador_resultado = (diferencia_self*self.numerdor) * \
+        numerador_resultado = (diferencia_self*self.numerador) + \
             (diferencia_otra*otra.numerador)
         return Fraccion(numerador_resultado, mcm)
 
@@ -73,33 +73,33 @@ class FraccionMixta():
         self.entero = entero
         self.fraccion = fraccion
 
-        def a_impropia(self):
-            numerador = self.fraccion.numerador
-            if (self.entero != 0):
-                numerador = numerador + (self.fraccion.denominador*self.entero)
-            return Fraccion(numerador, self.fraccion.denominador)
+    def a_impropia(self):
+        numerador = self.fraccion.numerador
+        if (self.entero != 0):
+            numerador = numerador + (self.fraccion.denominador*self.entero)
+        return Fraccion(numerador, self.fraccion.denominador)
 
-        def desde_impropia(fraccion: 'Fraccion'):
-            entero = 0
-            if fraccion.numerador >= fraccion.denominador:
-                entero = fraccion.numerador//fraccion.denominador
-                residuo = fraccion.numerador % fraccion.denominador
-                if residuo > 0:
-                    fraccion = Fraccion(residuo, fraccion.denominador)
+    def desde_impropia(fraccion: 'Fraccion'):
+        entero = 0
+        if fraccion.numerador >= fraccion.denominador:
+            entero = fraccion.numerador//fraccion.denominador
+            residuo = fraccion.numerador % fraccion.denominador
+            if residuo > 0:
+                fraccion = Fraccion(residuo, fraccion.denominador)
 
-                else:
-                    fraccion = None
+            else:
+                fraccion = None
 
-            return FraccionMixta(entero, fraccion)
+        return FraccionMixta(entero, fraccion)
 
-            def __str__(self):
-                resultado = ""
+    def __str__(self):
+        resultado = ""
 
-                if self.entero:
-                    resultado += str(self.entero)
-                    if self.fraccion != None:
-                        resultado += " + "
-                if self.fraccion:
-                    resultado += str(self.fraccion)
+        if self.entero:
+            resultado += str(self.entero)
+            if self.fraccion != None:
+                resultado += "+"
+        if self.fraccion:
+            resultado += str(self.fraccion)
 
-                    return resultado
+        return resultado
